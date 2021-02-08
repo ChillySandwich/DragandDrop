@@ -1,0 +1,50 @@
+@media(grid:0) {
+
+.layout{
+    font-family: 'Roboto', sans-serif;
+    background-color: green;
+    height: 100vh;
+    width:100vw;
+    display: grid;
+    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-columns: 1fr 4fr;
+    border: black solid 1px;
+    grid-template-areas: 
+    "header header"
+    "sidebar map"
+    "footer footer"
+    ;
+}
+
+.header {
+    background-color: green;
+    grid-area: header;
+}
+
+.sidebar {
+    background-color: white;
+    grid-area: sidebar;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    
+
+}
+
+.map {
+    background-color: aliceblue;
+    grid-area: map;
+    text-align: center;
+    height:100%;
+    vertical-align: middle;
+
+}
+
+.footer{
+    background-color: green;
+    grid-area: footer;
+}
+}
+
+
+
