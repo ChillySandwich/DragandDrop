@@ -277,13 +277,13 @@ const DraggableReferenceRectangle = (props) => {
 
   const draggableRef = useRef(null);
   const transformRef = useRef();
-  const shapeRef = useRef();
 
   useEffect(() => {
     if (props.isSelected) {
-      transformRef.current.nodes([shapeRef.current])
-      transformRef.current.getLayer().batchdraw();
-      console.log(DraggableReferenceRectangle);
+      // -------------------------------
+      transformRef.current.nodes([draggableRef.current]);
+      console.log(transformRef.current.getLayer());
+      transformRef.current.getLayer().batchDraw();
     }
 
   }, [props.isSelected]);
@@ -296,13 +296,12 @@ const DraggableReferenceRectangle = (props) => {
       <Rect
         onClick={props.onSelect}
         onTap={props.onSelect}
-        ref={shapeRef}
-        {...props.shapeProps}
         ref={draggableRef}
+        {...props.shapeProps}
         x={rectanglePosition.x}
         y={rectanglePosition.y}
-        width={35}
-        height={35}
+        width={25}
+        height={25}
         stroke="black"
         strokeWidth={0.5}
         draggable
@@ -400,8 +399,8 @@ const ToolBar = (props) => {
         fill="white"
       />
 
-      {/* create base rectangle */}
-      <Rect
+      {/* create base rectangle - REMOVED */}
+      {/* <Rect
         x={22.5}
         y={window.innerHeight / 2 - 50}
         width={25}
@@ -409,7 +408,7 @@ const ToolBar = (props) => {
         stroke="black"
         strokeWidth={0.5}
 
-      />
+      /> */}
       <DraggableReferenceRectangle
         key={`TOOLBAR_RECT`}
         idx={0}
@@ -418,15 +417,15 @@ const ToolBar = (props) => {
         onDragEnd={TOOLBAR_RECTANGLE_DRAG}
         initialPosition={{ x: 22.5, y: (!props.toolbarAttributes) ? (window.innerHeight / 2 - 50) : props.toolbarAttributes.y + 50 }}
       />
-      {/* create base ellipse */}
-      <Ellipse
+      {/* create base ellipse - REMOVED */}
+      {/* <Ellipse
         x={35}
         y={window.innerHeight / 2}
         radiusX={12.5}
         radiusY={12.5}
         stroke="black"
         strokeWidth={0.5}
-      />
+      /> */}
 
       <DraggableReferenceEllipse
         key={`TOOLBAR_ELLIP`}
@@ -442,12 +441,13 @@ const ToolBar = (props) => {
         initialPosition={{ x: 35, y: (!props.toolbarAttributes) ? (window.innerHeight / 2) : props.toolbarAttributes.y }}
       />
 
-      <Image
+      {/* REMOVED */}
+      {/* <Image
         x={18}
         y={window.innerHeight / 2 + 30} s
         width={35}
         height={35}
-      />
+      /> */}
 
       <DraggableReferenceImage
         key={`TOOLBAR_IMAGE`}
@@ -480,6 +480,8 @@ const App = () => {
     }
   };
 
+  console.log(`SELECTED SHAPE: ${selectedId}`)
+
   return (
     //creates background stage (like canvas)
     <Stage
@@ -504,8 +506,7 @@ const App = () => {
               // onDblClick={(e) => { STANDARD_RECTANGLE_DELETE(e, eachRect.idx, eachRect, userHazards, setUserHazards) }}
               isSelected={eachRect.idx === selectedId}
               onSelect={() => {
-                selectShape(eachRect.id);
-                console.log("Shape Selected" + eachRect.idx)
+                selectShape(eachRect.idx);
               }}
               onChange={(newAttrs) => {
                 const rects = userHazards.rectangles.slice();
